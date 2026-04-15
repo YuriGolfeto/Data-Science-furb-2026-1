@@ -1,4 +1,4 @@
-﻿# Byte-compiled / optimized / DLL files
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
 *$py.class
@@ -211,3 +211,8 @@ Untitled*.ipynb
 *.crt
 openrouter.ai
 *.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+./Study
