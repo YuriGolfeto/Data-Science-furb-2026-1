@@ -1,0 +1,48 @@
+dataset,variable_name,description,data_type,unit,possible_values,quality_notes
+DF_QNA_EXPENDITURE_CAPITA,STRUCTURE,Type of SDMX structure,Categorical,—,DATAFLOW,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,STRUCTURE_ID,Full dataset identifier,Categorical,—,OECD.SDD.NAD:...,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,STRUCTURE_NAME,Human-readable dataset name,Text,—,Always null,100% missing — drop
+DF_QNA_EXPENDITURE_CAPITA,ACTION,Data action code,Categorical,—,I (Insert),Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,FREQ,Observation frequency,Categorical,—,Q (Quarterly),Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,ADJUSTMENT,Seasonal/calendar adjustment flag,Categorical,—,Y,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,REF_AREA,ISO 3-letter country/area code,Categorical,—,"AUS, CAN, USA...",Key join column; 47 values incl. aggregates
+DF_QNA_EXPENDITURE_CAPITA,SECTOR,Institutional sector,Categorical,—,S1,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,COUNTERPART_SECTOR,Counterpart sector,Categorical,—,S1,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,TRANSACTION,NA transaction code,Categorical,—,B1GQ_POP,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,INSTR_ASSET,Instrument/asset type,Categorical,—,_Z,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,ACTIVITY,Economic activity,Categorical,—,_Z,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,EXPENDITURE,Expenditure category,Categorical,—,_Z,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,UNIT_MEASURE,Unit of measurement code,Categorical,—,USD_PPP_PS,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,PRICE_BASE,Price base methodology,Categorical,—,"V (current), LR (constant 2020)",Two variants per row — filter to LR (structural duplicates)
+DF_QNA_EXPENDITURE_CAPITA,TRANSFORMATION,Data transformation,Categorical,—,LA (annual level),Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,TABLE_IDENTIFIER,OECD table reference,Categorical,—,T0102,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,TIME_PERIOD,Reference period,Datetime,YYYY-QN,2024-Q4 to 2025-Q4,Key join column; needs parsing
+DF_QNA_EXPENDITURE_CAPITA,OBS_VALUE,GDP per capita,Numerical (float),USD/person PPP,~29000 to ~130000,TARGET VARIABLE; 0 missing values
+DF_QNA_EXPENDITURE_CAPITA,REF_YEAR_PRICE,Reference year for constant prices,Numerical (float),Year,2020 or null,50% null (MCAR-equiv); null only for PRICE_BASE=V rows
+DF_QNA_EXPENDITURE_CAPITA,BASE_PER,Base period for index series,Datetime,—,Always null,100% missing — drop
+DF_QNA_EXPENDITURE_CAPITA,CONF_STATUS,Confidentiality status,Categorical,—,F (free),Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,DECIMALS,Decimal places,Integer,—,1,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,OBS_STATUS,Observation status flag,Categorical,—,"A=final, P=provisional, E=estimated",Quality flag; 30% provisional — retain with note
+DF_QNA_EXPENDITURE_CAPITA,UNIT_MULT,Unit multiplier,Integer,—,0,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,CURRENCY,Currency code,Categorical,—,USD,Constant — drop
+DF_QNA_EXPENDITURE_CAPITA,Unnamed: N (x24),Empty separator columns,—,—,All null,SDMX artefact — drop all
+DF_IALFS_UNE_M,STRUCTURE,Type of SDMX structure,Categorical,—,DATAFLOW,Constant — drop
+DF_IALFS_UNE_M,STRUCTURE_ID,Full dataset identifier,Categorical,—,OECD.SDD.TPS:...,Constant — drop
+DF_IALFS_UNE_M,STRUCTURE_NAME,Human-readable dataset name,Text,—,Always null,100% missing — drop
+DF_IALFS_UNE_M,ACTION,Data action code,Categorical,—,I (Insert),Constant — drop
+DF_IALFS_UNE_M,REF_AREA,ISO 3-letter country code,Categorical,—,"CAN, USA, GBR...",Key join column; 43 unique values
+DF_IALFS_UNE_M,MEASURE,Measure type code,Categorical,—,UNE_LF_M,Constant — drop
+DF_IALFS_UNE_M,UNIT_MEASURE,Unit of measurement,Categorical,—,PT_LF_SUB,Constant — drop
+DF_IALFS_UNE_M,TRANSFORMATION,Data transformation,Categorical,—,_Z (none),Constant — drop
+DF_IALFS_UNE_M,ADJUSTMENT,Seasonal adjustment flag,Categorical,—,Y,Constant — drop
+DF_IALFS_UNE_M,SEX,Sex disaggregation,Categorical,—,_T (total),Constant in this export
+DF_IALFS_UNE_M,AGE,Age group,Categorical,—,Y_GE15 (15+),Constant in this export
+DF_IALFS_UNE_M,ACTIVITY,Activity status,Categorical,—,_Z,Constant — drop
+DF_IALFS_UNE_M,FREQ,Observation frequency,Categorical,—,M (Monthly),Constant — drop
+DF_IALFS_UNE_M,TIME_PERIOD,Reference period,Datetime,YYYY-MM,2025-02 to 2026-02,Key join column; aggregate to quarterly for merge
+DF_IALFS_UNE_M,OBS_VALUE,Monthly unemployment rate,Numerical (float),% of labour force,~2.5 to ~13,TARGET VARIABLE; 0 missing values
+DF_IALFS_UNE_M,BASE_PER,Base period,Datetime,—,Always null,100% missing — drop
+DF_IALFS_UNE_M,OBS_STATUS,Observation status flag,Categorical,—,"A=final, E=estimated",Quality flag; 4% estimated — retain with note
+DF_IALFS_UNE_M,UNIT_MULT,Unit multiplier,Integer,—,0,Constant — drop
+DF_IALFS_UNE_M,DECIMALS,Decimal places,Integer,—,1,Constant — drop
+DF_IALFS_UNE_M,Unnamed: N (x17),Empty separator columns,—,—,All null,SDMX artefact — drop all
