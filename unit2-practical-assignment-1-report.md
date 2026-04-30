@@ -215,11 +215,58 @@ No imputation strategies (mean, median, mode, LOCF, interpolation) were required
 
 ---
 
-## 4. Deliverables Summary
+## 4. Research Hypothesis
+
+### 4.1 Background and Motivation
+
+The central question of this project — the relationship between GDP per capita and unemployment across OECD economies — is grounded in **Okun's Law**: the empirical inverse relationship between economic output and unemployment. A naïve cross-country correlation between GDP per capita and unemployment rate is expected to be negative (richer countries tend to have lower unemployment). However, the dataset contains two well-documented **structural outliers** that may distort this relationship:
+
+- **Ireland (IRL):** GDP per capita in 2025 reaches approximately USD 126,000–129,000 PPP — roughly double that of comparable high-income economies such as the United States (~USD 73,500) or Denmark (~USD 69,900). This is a known distortion caused by **multinational corporations** (including Apple, Google, and Meta) booking intellectual property profits through Irish subsidiaries, which inflates Ireland's GDP figures without reflecting the actual living standards of Irish residents. Ireland's unemployment rate (~4.7%) is consistent with its true labor market performance and does not show anomalous behavior.
+- **Luxembourg (LUX):** GDP per capita is elevated (~USD 83,000–88,000 PPP) partly because its workforce includes a large proportion of **cross-border commuters** (from France, Germany, and Belgium) who contribute to economic output but are not counted as residents. This inflates denominator-adjusted income measures relative to domestic welfare.
+
+Both cases represent **structural distortions** — not random outliers — in which the GDP measure diverges from its theoretical meaning as a welfare proxy. Including them in a correlation analysis between GDP and unemployment risks inflating the apparent strength of the relationship, since both countries combine very high GDP figures with moderate unemployment, which mechanically strengthens a negative correlation slope.
+
+### 4.2 Formal Hypothesis
+
+$$H_0: |\rho_{\text{full}}| = |\rho_{\text{no-outliers}}|$$
+
+*The Pearson correlation between GDP per capita and unemployment rate is not statistically different when Ireland and Luxembourg are excluded from the sample.*
+
+$$H_1: |\rho_{\text{full}}| \neq |\rho_{\text{no-outliers}}|$$
+
+*Removing the structural outliers (IRL, LUX) significantly changes the magnitude and/or direction of the correlation, indicating that the apparent GDP–unemployment relationship in the full dataset is distorted by these two countries.*
+
+More precisely:
+
+| Hypothesis | Statement |
+|---|---|
+| $H_0$ | $\rho_{\text{full}} = \rho_{\text{no IRL, no LUX}}$ — structural outliers do not materially affect the observed correlation |
+| $H_1$ | $\rho_{\text{full}} \neq \rho_{\text{no IRL, no LUX}}$ — the correlation is artificially strengthened or weakened by the inclusion of GDP-distorted economies |
+
+### 4.3 Analytical Approach
+
+To test this hypothesis, the following procedure will be applied in the subsequent analysis notebook (`unit3-hypothesis.ipynb`):
+
+1. **Compute baseline correlation:** Calculate the Pearson correlation coefficient $r$ between `GDP_PER_CAPITA_USD_PPP` and `UNE_RATE_PCT` across all 41 countries using the merged dataset (`gdp_unemployment_merged.csv`). Report $r$, $r^2$, and the two-sided p-value.
+2. **Remove structural outliers:** Exclude Ireland (`IRL`) and Luxembourg (`LUX`) from the dataset, producing a 39-country sample.
+3. **Recompute correlation:** Calculate the same Pearson $r$ on the reduced sample and report the new $r$, $r^2$, and p-value.
+4. **Compare using Fisher's z-transformation:** Apply Fisher's z-test to formally test whether the two correlation coefficients ($r_{\text{full}}$ vs. $r_{\text{no-outliers}}$) are statistically different from each other at the $\alpha = 0.05$ significance level.
+5. **Visualize:** Produce scatter plots (GDP vs. unemployment) for both samples, marking the removed outliers in the full-sample chart. Include OLS regression lines for visual comparison.
+
+**Variables:**
+- Independent variable ($X$): `GDP_PER_CAPITA_USD_PPP` (constant 2020 USD PPP)
+- Dependent variable ($Y$): `UNE_RATE_PCT` (% of labour force, age 15+)
+- Unit of analysis: country-quarter pairs (up to 41 × 4 = 164 observations)
+
+**Expected outcome:** The correlation in the full sample is expected to be negative (consistent with Okun's Law), but its magnitude is expected to be overstated due to Ireland's extreme GDP values pulling the regression line. Removing IRL and LUX is expected to attenuate the correlation coefficient toward zero or reveal a weaker/noisier relationship — consistent with the theoretical prediction that GDP-distorted observations inflate apparent macro-economic regularity.
+
+---
+
+## 5. Deliverables Summary
 
 | Deliverable | Status |
 |---|---|
-| Short report (this document) | ✅ `unit2-report.md` |
+| Short report (this document) | ✅ `unit2-practical-assignment-1-report.md` |
 | Data dictionary | ✅ Section 2 + `data_dictionary.csv` |
 | Cleaned dataset — after duplicate removal | ✅ `datasets/gdp_per_capita_cleaned.csv` |
 | Cleaned dataset — after missing data treatment | ✅ `datasets/unemployment_quarterly_cleaned.csv` |
